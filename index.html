@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        @font-face {
+            font-family: 'TTRicordiGreto';
+            src: url('fonts/TTRicordiGreto-Medium.woff2') format('truetype');
+            font-weight: 500; 
+        }
+        
+        @font-face {
+            font-family: 'YSText-Medium';
+            src: url('fonts/YSText-Medium.woff2') format('truetype');
+            font-weight: normal; 
+        }
+        
+        body {
+            margin: 0;
+            font-family: 'TTRicordiGreto', serif; 
+            background-image: url('https://i.pinimg.com/originals/28/65/c5/2865c59fe7ade0f0b6e4d471ca5ce873.gif');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            overflow-y: auto; 
+            scroll-behavior: smooth; 
+        }
+
+        .track-title, .track-details {
+            font-family: 'YSText-Medium', sans-serif; 
+        }
+
+        .profile-container {
+            background: rgba(0, 0, 0, 0.48);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(14.1px);
+            -webkit-backdrop-filter: blur(14.1px);
+            border: 1px solid rgba(0, 0, 0, 0.78);
+            color: white;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: fixed;
+            bottom: 0;
+            position: relative; 
+            margin-top: 200px; 
+            
+            
+        }
+        
+        .profile-header {
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            position: relative;
+        }
+        
+        .profile-header img {
+    border-radius: 50%; 
+    width: 150px; 
+    height: 150px; 
+    border: 3px solid #1a1a1a;
+    position: absolute;
+    top: -100px;
+    object-fit: cover; 
+}
+        
+        .profile-info {
+            margin-top: 55px; 
+            text-align: center; 
+        }
+
+        .profile-info h2 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        .top-songs {
+            margin-top: 40px;
+            font-size: 1.2em;
+        }
+        
+        .track {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            position: relative;
+            transition: background-color 0.1s;
+            cursor: pointer;
+            border-radius: 16px;
+        }
+        
+        .track:hover {
+            transform: scale(1.02);
+            transition: transform 0.2s;
+            background: rgba(0, 0, 0, 0.23);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(9.8px);
+            -webkit-backdrop-filter: blur(9.8px);
+            border: 1px solid rgba(0, 0, 0, 0.78);
+        }
+        
+        .track-number {
+            width: 30px;
+            text-align: right;
+            margin-right: 10px;
+            color: #999;
+        }
+        
+        .track-cover {
+            width: 50px; 
+            height: 50px; 
+            margin-right: 10px; 
+            border-radius: 8px; 
+        }
+        
+        .film-cover {
+            width: 41px; 
+            height: 50px; 
+            margin-right: 10px; 
+            border-radius: 8px; 
+        }
+
+        .track-info {
+            flex-grow: 1; 
+            overflow: hidden; 
+        }
+        
+        .track-title {
+            font-size: 16px; 
+            font-weight: bold; 
+            color: #ffffff; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+        
+        .track-details, .track-title span {
+            font-size: 14px; 
+            color: #999; 
+        }
+
+        .info-box {
+            position: relative;
+            margin-top: 40px; 
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 10px; 
+            max-width: 100%; 
+            padding: 0 20px; 
+        }
+        
+        .info-item {
+            background: rgba(255, 255, 255, 0);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(2.7px);
+            -webkit-backdrop-filter: blur(2.7px);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            padding: 10px;
+            text-align: left; 
+            transition: background 0.3s, transform 0.2s, color 0.3s; 
+            display: flex;  
+            align-items: center; 
+            cursor: pointer; 
+        }
+        
+        .info-item:hover {
+            background: rgba(255, 255, 255, 0.04); 
+            transform: scale(1.05); 
+            color: #f0f0f0; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); 
+        }
+        
+        .info-icon {
+            width: 20px; 
+            height: 20px; 
+            margin-right: 10px; 
+        }
+        
+        .username {
+            color: gray; 
+            font-family: Arial, sans-serif; 
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img alt="Profile picture" src="https://i.pinimg.com/originals/f5/a5/ac/f5a5acd6ea20f156c65146b5dc5a6354.gif"/>
+            <div class="profile-info">
+                <h2>Никита <span class="verified"><i class="star"></i></span></h2>
+                <p class="username">@leredev</p>
+                <p>this is my profil hfjdsf hfjsd fh jskf hsdj hsdfh je.</p>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <div class="info-item">
+                <img class="info-icon" src="https://img.icons8.com/?size=100&id=101043&format=png&color=FFFFFF" alt="День рождения"/> 
+                01.01.2000
+            </div>
+            <div class="info-item">
+                <img class="info-icon" src="https://img.icons8.com/?size=100&id=vuBZHdDl29U9&format=png&color=FFFFFF" alt="Юзернейм" />
+                @leredev
+            </div>
+            <div class="info-item">
+                <img class="info-icon" src="https://img.icons8.com/?size=100&id=oFkcBVjfDZXs&format=png&color=FFFFFF" alt="Телеграм" />
+                @leredev
+            </div>
+            <div class="info-item">
+                <img class="info-icon" src="https://img.icons8.com/?size=100&id=NPsVF4PlvrRj&format=png&color=FFFFFF" alt="Дата регистрации" />
+                01.01.1914
+            </div>
+            <div class="info-item">
+                <img class="info-icon" src="https://img.icons8.com/?size=100&id=uYDXiwQzuOCj&format=png&color=FFFFFF" alt="Число топов" />
+                3
+            </div>
+        </div>
+        <div class="top-songs">
+            <h3>Top Movies</h3>
+            <div class="track">
+                <div class="track-number">1</div>
+                <img alt="Постер фильма" class="film-cover" src="https://avatars.mds.yandex.net/i?id=605e6c16282481d2a2760183077cca58_l-10704821-images-thumbs&n=13"/>
+                <div class="track-info">
+                    <div class="track-title">Oppenheimer
+                        <span>18+</span>
+                    </div>
+                    <div class="track-details">2023</div>
+                </div>
+            </div>
+            <div class="track">
+                <div class="track-number">2</div>
+                <img alt="Постер фильма" class="film-cover" src="https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/b1b1b1df-d682-4991-b8f1-1d3d8ed13bb0/1920x"/>
+                <div class="track-info">
+                    <div class="track-title">Parasite
+                        <span>18+</span>
+                    </div>
+                    <div class="track-details">2019</div>
+                </div>
+            </div>
+            <div class="track">
+                <div class="track-number">3</div>
+                <img alt="Постер фильма" class="film-cover" src="https://avatars.mds.yandex.net/get-mpic/11450294/2a0000018b4324509a602a9da1788ca20c77/orig"/>
+                <div class="track-info">
+                    <div class="track-title">The Green Mile
+                        <span>18+</span>
+                    </div>
+                    <div class="track-details">1999</div>
+                </div>
+            </div>
+            <div class="track">
+                <div class="track-number">4</div>
+                <img alt="Постер фильма" class="film-cover" src="https://amc-theatres-res.cloudinary.com/v1572277402/amc-cdn/production/2/movies/2600/2588/PosterDynamic/94420.jpg"/>
+                <div class="track-info">
+                    <div class="track-title">Forrest Gump
+                        <span>18+</span>
+                    </div>
+                    <div class="track-details">1994</div>
+                </div>
+            </div>
+            <div class="track">
+                <div class="track-number">5</div>
+                <img alt="Постер фильма" class="film-cover" src="https://i.pinimg.com/originals/89/d3/e0/89d3e07ee3ebbd8a7a56f1e048adf575.jpg"/>
+                <div class="track-info">
+                    <div class="track-title"> Fight Club
+                        <span>18+</span>
+                    </div>
+                    <div class="track-details">1999</div>
+                </div>
+            </div>
+         </div>
+         
+         <div class="top-songs">
+            <h3>Top Books</h3>
+            <div class="track">
+                <div class="track-number">1</div>
+                <img alt="Обложка книги" class="film-cover" src="https://cdn1.ozone.ru/multimedia/1014215536.jpg"/>
+                <div class="track-info">
+                    <div class="track-title">Demian
+                        <span></span>
+                    </div>
+                    <div class="track-details">Hermann Hesse</div>
+                </div>
+            </div>
+            <div class="track">
+                <div class="track-number">2</div>
+                <img alt="Обложка книги" class="film-cover" src="https://i.pinimg.com/736x/d9/e1/65/d9e1658b173b0b7a8369830acee01cbc.jpg"/>
+                <div class="track-info">
+                    <div class="track-title">The Great Gatsby
+                        <span></span>
+                    </div>
+                    <div class="track-details">F-Scott Fitzgerald</div>
+                </div>
+            </div>
+            <div class="track">
+                <div class="track-number">3</div>
+                <img alt="Обложка книги" class="film-cover" src="https://main-cdn.sbermegamarket.ru/big2/hlr-system/1722315117/100025899685b0.jpg"/>
+                <div class="track-info">
+                    <div class="track-title">Arch of Triumph
+                        <span></span>
+                    </div>
+                    <div class="track-details">Erich Maria Remarque</div>
+                </div>
+            </div>
+            <div class="track">
+                <div class="track-number">4</div>
+                <img alt="Обложка книги" class="film-cover" src="https://static2.my-shop.ru/products493/4925528/cover.jpg"/>
+                <div class="track-info">
+                    <div class="track-title">The Glass Bead Game
+                        <span></span>
+                    </div>
+                    <div class="track-details">Hermann Hesse</div>
+                </div>
+            </div>
+            <div class="track">
+                <div class="track-number">5</div>
+                <img alt="Обложка книги" class="film-cover" src="https://i.pinimg.com/originals/e7/10/8c/e7108cbdde63dbc999b2088ac7b5e479.jpg"/>
+                <div class="track-info">
+                    <div class="track-title">Norwegian Wood
+                        <span></span>
+                    </div>
+                    <div class="track-details">Haruki Murakami</div>
+                </div>
+            </div>
+            <div class="track">
+                <div class="track-number">6</div>
+                <img alt="Обложка книги" class="film-cover" src="https://i.pinimg.com/736x/54/36/08/543608d39924a746e02cccb70c2e113d.jpg"/>
+                <div class="track-info">
+                    <div class="track-title">Hear the Wind Sing
+                        <span></span>
+                    </div>
+                    <div class="track-details">Haruki Murakami</div>
+                </div>
+            </div>
+            <div class="track">
+                <div class="track-number">7</div>
+                <img alt="Обложка книги" class="film-cover" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1704153539i/44421460.jpg"/>
+                <div class="track-info">
+                    <div class="track-title">Before the coffee gets cold
+                        <span></span>
+                    </div>
+                    <div class="track-details">Toshikazu Kawaguchi</div>
+                </div>
+            </div>
+            <div class="track">
+                <div class="track-number">8</div>
+                <img alt="Обложка книги" class="film-cover" src="https://cdn1.ozone.ru/multimedia/1012668857.jpg"/>
+                <div class="track-info">
+                    <div class="track-title">Les Misérables
+                        <span></span>
+                    </div>
+                    <div class="track-details">Victor Hugo</div>
+                </div>
+            </div>
+        <div class="top-songs">
+           <h3>Top Songs</h3>
+           <a href="https://genius.com/Nf-the-search-lyrics" class="track">
+            <div class="track-number">1</div>
+            <img alt="Обложка трека" class="track-cover" src="https://t2.genius.com/unsafe/227x227/https%3A%2F%2Fimages.genius.com%2Fd915e3e58ba42107991af17b0a3b0f5a.1000x1000x1.jpg"/>
+            <div class="track-info">
+                <div class="track-title">The Search
+                    <span></span>
+                </div>
+                <div class="track-details">NF</div>
+            </div>
+            </a>
+       </div>
+    </div>
+</body>
+</html>
